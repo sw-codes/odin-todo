@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+}
+
+div {
+    border: 1px solid green;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+#sidebar {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+}
+
+#project-list {
+    grid-row-start: 2;
+}
+
+#main-content {
+    grid-column-start: 2;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+
+.note-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3fr);
+    margin: 8px;
+    gap: 4px;
+}
+
+.item-div {
+    padding: 4px;
+}
