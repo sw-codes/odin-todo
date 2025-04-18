@@ -1,25 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Todo List</title>
-    <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <div id="content">
         <div id="sidebar">
-            <div id="sidebar-title-div">
-                <h1>todo list</h1>
+            <div id="sidebar-header">
+                <h1>do your todo</h1>
+                <div id="sidebar-button-div"></div>
             </div>
-            <div id="project-list">
-                <h3>projects here</h3>
-            </div>
+            <div id="project-list"></div>
         </div>
-        <div id="main-content">
-            <h2 id="project-name">project name here</h2>
-            <div class="note-div"></div>
+        <div id="page-content">
+            <dialog id="add-todo-dialog">
+                <form action="">
+                    <label for="todoTitle">
+                        enter todo title:
+                        <input type="text" name="todoTitle" id="todoTitle">
+                    </label>
+                    <label for="todoDesc">
+                        enter todo description:
+                        <input type="text" name="todoDesc" id="todoDesc">
+                    </label>
+                    <!-- <label for="todoCollection">
+                        enter todo collection:
+                        <input type="text" name="todoCollection" id="todoCollection" placeholder="leave blank for no collection">
+                    </label> -->
+                    <label for="todo-collections">
+                        select a collection:
+                        <select name="todo-collections" id="todo-collections">
+
+                        </select>
+                    </label>
+                    <label for="todoPriority">
+                        set a priority:
+                        <select name="todoPriority" id="todoPriority">
+                            <option value="high">high</option>
+                            <option value="medium">medium</option>
+                            <option value="low">low</option>
+                        </select>
+                    </label>
+                    <div>
+                        <button value="cancel" formmethod="dialog">cancel</button>
+                        <button id="dialogConfirmBtn" value="default">add todo</button>
+                    </div>
+                    
+                </form>
+            </dialog>
+            <dialog id="new-project-dialog">
+                <form action="">
+                    <label for="user-project-title">
+                        project title:
+                        <input type="text" name="project-title" id="user-project-title">
+                    </label>
+                    <button id="new-project-confirm-button" value="default">create project</button>
+                </form>
+            </dialog>
+            <div id="content-header"></div>
+            <div id="todo-content"></div>
         </div>
     </div>
 </body>
+
 </html>
