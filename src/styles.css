@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    list-style-type: none;
 }
 
 html {
@@ -51,4 +52,12 @@ form {
 #project-list {
     display: flex;
     flex-direction: column;
+}
+
+.collection-li-div {
+    padding: 8px;
+}
+
+.collection-h4 {
+    text-decoration: underline;
 }

@@ -14,7 +14,12 @@
                 <h1>do your todo</h1>
                 <div id="sidebar-button-div"></div>
             </div>
-            <div id="project-list"></div>
+            <div id="project-list">
+                <div class="collection-li-div">
+                    <h4 class="collection-h4">home</h4>
+                </div>
+                
+            </div>
         </div>
         <div id="page-content">
             <dialog id="add-todo-dialog">
@@ -49,7 +54,7 @@
                         <button value="cancel" formmethod="dialog">cancel</button>
                         <button id="dialogConfirmBtn" value="default">add todo</button>
                     </div>
-                    
+
                 </form>
             </dialog>
             <dialog id="new-project-dialog">
@@ -58,7 +63,10 @@
                         project title:
                         <input type="text" name="project-title" id="user-project-title">
                     </label>
-                    <button id="new-project-confirm-button" value="default">create project</button>
+                    <div>
+                        <button value="cancel" formmethod="dialog">cancel</button>
+                        <button id="new-project-confirm-button" value="default">create project</button>
+                    </div>
                 </form>
             </dialog>
             <div id="content-header"></div>
