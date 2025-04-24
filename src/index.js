@@ -20,7 +20,7 @@ const newCollectionDialog = document.querySelector('#new-collection-dialog');
 
 //show add todo item dialog
 const sidebarAddItemButton = document.createElement('button');
-sidebarAddItemButton.textContent = 'add todo';
+sidebarAddItemButton.textContent = 'Add Todo';
 
 sidebarAddItemButton.addEventListener('click', () => {
     addTodoDialog.showModal();
@@ -29,7 +29,7 @@ sidebarAddItemButton.addEventListener('click', () => {
 
 //show add project dialog
 const sidebarAddCollectionButton = document.createElement('button');
-sidebarAddCollectionButton.textContent = 'create collection';
+sidebarAddCollectionButton.textContent = 'Create Collection';
 
 sidebarAddCollectionButton.addEventListener('click', () => {
     newCollectionDialog.showModal();
@@ -37,7 +37,7 @@ sidebarAddCollectionButton.addEventListener('click', () => {
 //
 
 const userProjectTitle = document.querySelector('#user-collection-title');
-const newProjectConfirmButton = document.querySelector('#new-project-confirm-button');
+const newProjectConfirmButton = document.querySelector('#new-collection-confirm-button');
 
 newCollectionDialog.addEventListener('close', () => {
     if (newCollectionDialog.returnValue === 'cancel') {
@@ -61,11 +61,11 @@ sidebarButtonDiv.appendChild(sidebarAddCollectionButton);
 sidebarButtonDiv.appendChild(sidebarAddItemButton);
 
 //collect the input data from the add todo item form and open and close the dialog
-const userTodoTitle = document.querySelector('#todoTitle');
-const userTodoDesc = document.querySelector('#todoDesc');
+const userTodoTitle = document.querySelector('#todo-title');
+const userTodoDesc = document.querySelector('#todo-desc');
 const userTodoCollection = document.querySelector('#todo-collections');
-const userTodoPriority = document.querySelector('#todoPriority');
-const addTodoConfirmBtn = document.querySelector('#dialogConfirmBtn');
+const userTodoPriority = document.querySelector('#todo-priority');
+const addTodoConfirmBtn = document.querySelector('#dialog-confirm-btn');
 
 addTodoDialog.addEventListener('close', () => {
     if (addTodoDialog.returnValue === 'cancel') {
@@ -81,10 +81,6 @@ addTodoDialog.addEventListener('close', () => {
                 userTodoCollection.value)
         )
         renderItems(items);
-
-        console.log(
-            'userTitle: ' + userTodoTitle.value + ' userDesc: ' + userTodoDesc.value + ' userColl: ' + userTodoCollection.value + ' userPri: ' + userTodoPriority.value
-        );
 
         userTodoTitle.value = '';
         userTodoDesc.value = '';
@@ -109,28 +105,6 @@ homeH4.addEventListener('click', () => {
     titleh1.textContent = 'home';
     renderItems();
 })
-
-//show a single item from the items array on the page
-function renderItem(item) {
-    const todoContentDiv = document.querySelector('#todo-content');
-
-    const todoDiv = document.createElement('div');
-    todoDiv.setAttribute('class', 'todo-div');
-
-    const titleP = document.createElement('p');
-    titleP.textContent = item.title;
-
-    const descP = document.createElement('p');
-    descP.textContent = item.description;
-
-    const priorityP = document.createElement('p');
-    priorityP.textContent = item.priority;
-
-    todoDiv.appendChild(titleP);
-    todoDiv.appendChild(descP);
-    todoDiv.appendChild(priorityP);
-    todoContentDiv.appendChild(todoDiv);
-}
 
 //show all items in the items array on the page
 function renderItems() {
@@ -160,6 +134,7 @@ function renderItems() {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'delete';
+        deleteButton.setAttribute('class', 'todo-delete-button');
         deleteButton.addEventListener('click', () => {
             items.splice(items.indexOf(items[i]), 1);
             renderItems();
@@ -221,7 +196,6 @@ function renderItemsByCollectionName(collectionName) {
 function createCollectionTab(collectionTitle) {
 
     todoCollections.push(collectionTitle);
-    console.log(todoCollections);
 
     const collectionListDiv = document.querySelector('.user-collection-div');
 
@@ -256,13 +230,11 @@ function createCollectionTab(collectionTitle) {
 
 //remove collection from todoCollections array
 function removeCollection(collectionTitle) {
-    console.log(todoCollections);
     for (let i = 0; i < todoCollections.length; i++) {
         if (todoCollections[i] === collectionTitle) {
             todoCollections.splice(todoCollections.indexOf(todoCollections[i]), 1);
         }
     }
-    console.log(todoCollections);
     renderCollectionList();
 }
 

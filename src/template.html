@@ -11,7 +11,7 @@
     <div id="content">
         <div id="sidebar">
             <div id="sidebar-header">
-                <h1>do your todo</h1>
+                <h1>Do Your Todo</h1>
                 <div id="sidebar-button-div"></div>
             </div>
             <div id="collection-list">
@@ -25,35 +25,31 @@
         <div id="page-content">
             <dialog id="add-todo-dialog">
                 <form action="">
-                    <label for="todoTitle">
+                    <label for="todo-title">
                         enter todo title:
-                        <input type="text" name="todoTitle" id="todoTitle">
+                        <input type="text" name="todo-title" id="todo-title">
                     </label>
-                    <label for="todoDesc">
+                    <label for="todo-desc">
                         enter todo description:
-                        <input type="text" name="todoDesc" id="todoDesc">
+                        <input type="text" name="todo-desc" id="todo-desc">
                     </label>
-                    <!-- <label for="todoCollection">
-                        enter todo collection:
-                        <input type="text" name="todoCollection" id="todoCollection" placeholder="leave blank for no collection">
-                    </label> -->
                     <label for="todo-collections">
                         select a collection:
                         <select name="todo-collections" id="todo-collections">
 
                         </select>
                     </label>
-                    <label for="todoPriority">
+                    <label for="todo-priority">
                         set a priority:
-                        <select name="todoPriority" id="todoPriority">
+                        <select name="todo-priority" id="todo-priority">
                             <option value="high">high</option>
                             <option value="medium">medium</option>
                             <option value="low">low</option>
                         </select>
                     </label>
                     <div>
-                        <button value="cancel" formmethod="dialog">cancel</button>
-                        <button id="dialogConfirmBtn" value="default">add todo</button>
+                        <button value="cancel" formmethod="dialog">Cancel</button>
+                        <button id="dialog-confirm-btn" value="default">Add Todo</button>
                     </div>
 
                 </form>
@@ -61,12 +57,12 @@
             <dialog id="new-collection-dialog">
                 <form action="">
                     <label for="user-collection-title">
-                        project title:
+                        collection title:
                         <input type="text" name="user-collection-title" id="user-collection-title">
                     </label>
                     <div>
-                        <button value="cancel" formmethod="dialog">cancel</button>
-                        <button id="new-project-confirm-button" value="default">create project</button>
+                        <button value="cancel" formmethod="dialog">Cancel</button>
+                        <button id="new-collection-confirm-button" value="default">Create Collection</button>
                     </div>
                 </form>
             </dialog>

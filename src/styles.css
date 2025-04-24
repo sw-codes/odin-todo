@@ -118,3 +118,7 @@ button {
 .collection-del-btn {
     margin-left: auto;
 }
+
+.todo-delete-button {
+    margin-top: 12px;
+}
