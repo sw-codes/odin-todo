@@ -14,10 +14,11 @@
                 <h1>do your todo</h1>
                 <div id="sidebar-button-div"></div>
             </div>
-            <div id="project-list">
-                <div class="collection-li-div">
-                    <h4 class="collection-h4">home</h4>
+            <div id="collection-list">
+                <div id="home-collection-div" class="collection-li-div">
+                    <h4 id="home-collection-h4" class="collection-h4">home</h4>
                 </div>
+                <div class="user-collection-div"></div>
                 
             </div>
         </div>
@@ -57,11 +58,11 @@
 
                 </form>
             </dialog>
-            <dialog id="new-project-dialog">
+            <dialog id="new-collection-dialog">
                 <form action="">
-                    <label for="user-project-title">
+                    <label for="user-collection-title">
                         project title:
-                        <input type="text" name="project-title" id="user-project-title">
+                        <input type="text" name="user-collection-title" id="user-collection-title">
                     </label>
                     <div>
                         <button value="cancel" formmethod="dialog">cancel</button>

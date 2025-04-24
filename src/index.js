@@ -1,54 +1,20 @@
 import "./styles.css";
-import { domController } from "./dom-controller";
+import { TodoItem } from "./todo-classes";
 
 const app = {
     init: function () {
-        domController.init();
+
     }
 }
 
 //app.init();
 
-class TodoItem {
-    constructor(title, description, priority, collection) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.collection = collection;
-    }
-
-    getTitle() {
-        return this.title;
-    }
-
-    getDescription() {
-        return this.description;
-    }
-
-    getPriority() {
-        return this.priority;
-    }
-
-    getCollection() {
-        return this.collection;
-    }
-}
-
-class TodoCollection {
-    items = [];
-
-    constructor(title) {
-        this.title = title;
-    }
-}
-
 //arrays for todo storage
 let todoCollections = [];
 let items = [];
 
-
 const addTodoDialog = document.querySelector('#add-todo-dialog');
-const newProjectDialog = document.querySelector('#new-project-dialog');
+const newCollectionDialog = document.querySelector('#new-collection-dialog');
 
 //create and show sidebar content
 
@@ -62,36 +28,36 @@ sidebarAddItemButton.addEventListener('click', () => {
 //
 
 //show add project dialog
-const sidebarAddProjectButton = document.createElement('button');
-sidebarAddProjectButton.textContent = 'create project';
+const sidebarAddCollectionButton = document.createElement('button');
+sidebarAddCollectionButton.textContent = 'create collection';
 
-sidebarAddProjectButton.addEventListener('click', () => {
-    newProjectDialog.showModal();
+sidebarAddCollectionButton.addEventListener('click', () => {
+    newCollectionDialog.showModal();
 })
 //
 
-const userProjectTitle = document.querySelector('#user-project-title');
+const userProjectTitle = document.querySelector('#user-collection-title');
 const newProjectConfirmButton = document.querySelector('#new-project-confirm-button');
 
-newProjectDialog.addEventListener('close', () => {
-    if (newProjectDialog.returnValue === 'cancel') {
+newCollectionDialog.addEventListener('close', () => {
+    if (newCollectionDialog.returnValue === 'cancel') {
         return;
-    } else if (newProjectDialog.returnValue === '') {
+    } else if (newCollectionDialog.returnValue === '') {
         return;
     } else {
-        createProjectTab(newProjectDialog.returnValue);
+        createCollectionTab(newCollectionDialog.returnValue);
         userProjectTitle.value = '';
     }
 
 })
 newProjectConfirmButton.addEventListener('click', () => {
     event.preventDefault();
-    newProjectDialog.close(userProjectTitle.value);
+    newCollectionDialog.close(userProjectTitle.value);
 })
 
 //add sidebar content
 const sidebarButtonDiv = document.querySelector('#sidebar-button-div');
-sidebarButtonDiv.appendChild(sidebarAddProjectButton);
+sidebarButtonDiv.appendChild(sidebarAddCollectionButton);
 sidebarButtonDiv.appendChild(sidebarAddItemButton);
 
 //collect the input data from the add todo item form and open and close the dialog
@@ -109,9 +75,9 @@ addTodoDialog.addEventListener('close', () => {
     } else {
         items.push(
             new TodoItem(
-                userTodoTitle.value, 
-                userTodoDesc.value, 
-                userTodoPriority.value, 
+                userTodoTitle.value,
+                userTodoDesc.value,
+                userTodoPriority.value,
                 userTodoCollection.value)
         )
         renderItems(items);
@@ -137,6 +103,13 @@ const titleh1 = document.createElement('h2');
 titleh1.textContent = 'home';
 headerDiv.appendChild(titleh1);
 
+//set home list item event listener
+const homeH4 = document.querySelector('#home-collection-h4');
+homeH4.addEventListener('click', () => {
+    titleh1.textContent = 'home';
+    renderItems();
+})
+
 //show a single item from the items array on the page
 function renderItem(item) {
     const todoContentDiv = document.querySelector('#todo-content');
@@ -161,6 +134,9 @@ function renderItem(item) {
 
 //show all items in the items array on the page
 function renderItems() {
+
+    titleh1.textContent = 'home';
+
     const todoContentDiv = document.querySelector('#todo-content');
     while (todoContentDiv.firstChild) {
         todoContentDiv.removeChild(todoContentDiv.lastChild);
@@ -242,44 +218,89 @@ function renderItemsByCollectionName(collectionName) {
 }
 
 //create project button in the sidebar
-function createProjectTab(projectTitle) {
-    const projectListDiv = document.querySelector('#project-list');
+function createCollectionTab(collectionTitle) {
+
+    todoCollections.push(collectionTitle);
+    console.log(todoCollections);
+
+    const collectionListDiv = document.querySelector('.user-collection-div');
 
     const collectionLiDiv = document.createElement('div');
     collectionLiDiv.setAttribute('class', 'collection-li-div');
+
     const collectionLi = document.createElement('li');
+
     const collectionLiH4 = document.createElement('h4');
     collectionLiH4.setAttribute('class', 'collection-h4');
-    collectionLiH4.textContent = projectTitle;
+    collectionLiH4.textContent = collectionTitle;
 
     const collectionDeleteBtn = document.createElement('button');
-    collectionDeleteBtn.textContent = 'delete';
+    collectionDeleteBtn.textContent = 'x';
+    collectionDeleteBtn.setAttribute('class', 'collection-del-btn');
 
-    collectionLi.addEventListener('click', () => {
-        console.log('li name: ' + collectionLiH4.textContent);
-        // collectionLiDiv.appendChild(collectionDeleteBtn);
-        renderItemsByCollectionName(projectTitle);
+    collectionDeleteBtn.addEventListener('click', () => {
+        removeCollection(collectionTitle);
     })
 
-    // const projectButton = document.createElement('button');
-    // projectButton.setAttribute('class', 'project-button');
-    // projectButton.textContent = projectTitle;
-
-    // projectButton.addEventListener('click', () => {
-    //     console.log('project button name: ' + projectButton.textContent);
-    // })
-
-    // projectListDiv.appendChild(projectButton);
+    collectionLi.addEventListener('click', () => {
+        renderItemsByCollectionName(collectionTitle);
+    })
 
     collectionLi.appendChild(collectionLiH4);
     collectionLiDiv.appendChild(collectionLi);
-    projectListDiv.appendChild(collectionLiDiv);
-
-    todoCollections.push(projectTitle);
+    collectionLiDiv.appendChild(collectionDeleteBtn);
+    collectionListDiv.appendChild(collectionLiDiv);
 
     populateCollectionList();
 }
 
+//remove collection from todoCollections array
+function removeCollection(collectionTitle) {
+    console.log(todoCollections);
+    for (let i = 0; i < todoCollections.length; i++) {
+        if (todoCollections[i] === collectionTitle) {
+            todoCollections.splice(todoCollections.indexOf(todoCollections[i]), 1);
+        }
+    }
+    console.log(todoCollections);
+    renderCollectionList();
+}
+
+//show list of collections in sidebar
+function renderCollectionList() {
+    const collectionListDiv = document.querySelector('.user-collection-div');
+    while (collectionListDiv.firstChild) {
+        collectionListDiv.removeChild(collectionListDiv.lastChild);
+    }
+    for (let i = 0; i < todoCollections.length; i++) {
+        const collectionLiDiv = document.createElement('div');
+        collectionLiDiv.setAttribute('class', 'collection-li-div');
+
+        const collectionLi = document.createElement('li');
+
+        const collectionLiH4 = document.createElement('h4');
+        collectionLiH4.setAttribute('class', 'collection-h4');
+        collectionLiH4.textContent = todoCollections[i];
+
+        const collectionDeleteBtn = document.createElement('button');
+        collectionDeleteBtn.textContent = 'delete';
+
+        collectionDeleteBtn.addEventListener('click', () => {
+            removeCollection(todoCollections[i]);
+        })
+
+        collectionLi.addEventListener('click', () => {
+            renderItemsByCollectionName(todoCollections[i]);
+        })
+
+        collectionLi.appendChild(collectionLiH4);
+        collectionLiDiv.appendChild(collectionLi);
+        collectionLiDiv.appendChild(collectionDeleteBtn);
+        collectionListDiv.appendChild(collectionLiDiv);
+    }
+}
+
+//adds items to the select dropdown in todo creation
 function populateCollectionList() {
     const todoCollectionsSelect = document.querySelector('#todo-collections')
     while (todoCollectionsSelect.firstChild) {
@@ -297,7 +318,5 @@ function populateCollectionList() {
     noCollectionOption.textContent = 'none';
     todoCollectionsSelect.appendChild(noCollectionOption);
 }
-
-
 
 populateCollectionList();

@@ -7,20 +7,46 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    background-color: #2978A0;
+}
+
 form {
     display: flex;
     flex-direction: column;
+}
+
+h1 {
+    font-size: 44px;
+}
+
+h1,
+h2,
+h4 {
+    color: #dfdda1;
+}
+
+p {
+    color: #315659;
+}
+
+button {
+    font-size: 16px;
+    background-color: #FBACBE;
+    color: 315659;
+    border: transparent;
 }
 
 #add-todo-dialog {
     margin: auto;
 }
 
-#new-project-dialog {
+#new-collection-dialog {
     margin: auto;
 }
 
 #content {
+    height: 100vh;
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
@@ -28,11 +54,25 @@ form {
 #sidebar {
     display: flex;
     flex-direction: column;
+    border-right: 2px solid #FBACBE;
+}
+
+#sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#sidebar-button-div {
+    display: flex;
+    gap: 8px;
 }
 
 #content-header {
     padding: 8px;
     margin: 8px;
+    border-bottom: 2px solid #FBACBE;
 }
 
 #page-content {
@@ -42,22 +82,39 @@ form {
 
 #todo-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 8px;
+    background-color: #2978A0;
+    height: 100%;
 }
 
 .todo-div {
-    border: 1px solid green;
+    border: 1px solid #FBACBE;
+    border-radius: 4px;
+    padding: 4px;
+    height: fit-content;
+    background-color: #dfdda1;
 }
 
-#project-list {
+#collection-list {
     display: flex;
     flex-direction: column;
+    padding: 4px;
+    margin-top: 8px;
+    gap: 8px;
 }
 
 .collection-li-div {
     padding: 8px;
+    display: flex;
+    border: 1px solid #FBACBE;
 }
 
 .collection-h4 {
     text-decoration: underline;
+}
+
+.collection-del-btn {
+    margin-left: auto;
 }
